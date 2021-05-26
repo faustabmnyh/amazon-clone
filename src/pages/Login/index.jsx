@@ -10,8 +10,6 @@ function Login() {
 
     const signIn = e => {
         e.preventDefault();
-        // bair gak ke refresh browww
-
         if (auth) {
 
             auth.signInWithEmailAndPassword(email, password).then((auth) => {

@@ -24,9 +24,8 @@ function Payment() {
   const elements = useElements();
 
   useEffect(() => {
-    // generate the special stripe secret which allows us to charge a customer
+    // get client secret
     const getClientSecret = async () => {
-      // axios adalah membuat atau meminta post atau get
       const response = await axios.post(
        `/payments/create?total=${Math.round(
           getBasketTotal(basket) * 0.00006 * 100
@@ -38,21 +37,16 @@ function Payment() {
   }, [basket]);
 
 
-  const handleSubmit = async (event) => {
-    // do all fancy stripe
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setProcessing(true);
-    //  client secret untuk stripe tau berapa kita membayarnya
-    const payload = await stripe
+     await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
       })
       .then(({ paymentIntent }) => {
-        // semacam konfirmasi
-        // jika semaunya berhasil
-
         db.collection("users")
           .doc(user?.uid)
           .collection("orders")
@@ -71,16 +65,15 @@ function Payment() {
           type: "EMPTY_BASKET",
         });
 
-        // kita gamau user ke page payment
         history.replace("/orders");
       });
   };
 
-  const handleChange = (event) => {
+  const handleChange = (e) => {
     // listen for changes in the CardElements
     // and display any errors as the customer types their card details
-    setDisabled(event.empty); // misalnya kosong bakal di disable tombolnya
-    setError(event.error ? event.error.message : "");
+    setDisabled(e.empty); 
+    setError(e.error ? e.error.message : "");
   };
 
   return (
@@ -88,7 +81,6 @@ function Payment() {
       <div className="payment__container">
         <h1>Checkout ({<Link to="/checkout">{basket?.length} items)</Link>}</h1>
 
-        {/* payment section - delivery addres */}
         <div className="payment__section">
           <div className="payment__title">
             <h3>Delivery Address</h3>
@@ -100,14 +92,14 @@ function Payment() {
           </div>
         </div>
 
-        {/* payment section - review item */}
         <div className="payment__section">
           <div className="payment__title">
             <h3>Review Items and Delivery</h3>
           </div>
           <div className="payment__items">
-            {basket.map((item) => (
+            {basket.map((item,i) => (
               <CheckoutProduct
+                key={i}
                 id={item.id}
                 title={item.title}
                 image={item.image}
@@ -119,7 +111,6 @@ function Payment() {
           </div>
         </div>
 
-        {/* payment section - payment method */}
         <div className="payment__section">
           <div className="payment__title">
             <h3>Payment Method</h3>
@@ -147,7 +138,6 @@ function Payment() {
                   Don't use your real account if you wanna try it, just use fake account like 4242!, and when you not use fake account and error occurs we not will cover it. <strong>DON'T USE YOUR REAL ACCOUNT!!</strong>
                 </p>
               </div>
-              {/* error */}
               {error && <div>{error}</div>}
             </form>
           </div>

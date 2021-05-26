@@ -7,9 +7,7 @@ import { auth } from "../../utils/firebase";
 import "./Header.css";
 
 function Header() {
-  const [{ basket, user, displayName }, dispatch] = useStateValue();
-
-  console.log(displayName);
+  const [{ basket, user },dispatch] = useStateValue();
 
   const handleAuthentication = () => {
     if (user) {
@@ -23,6 +21,7 @@ function Header() {
         <img
           src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
           className="header__logo"
+          alt=""
         />
       </Link>
 
@@ -33,11 +32,10 @@ function Header() {
 
       <div className="header__nav">
         <Link to={!user && "/login"}>
-          {/* jadi ini mislnya gaada user misalnya pas logout lah maka dia gak akan pidah ke login page  */}
           <div onClick={handleAuthentication} className="header__option">
             <span className="header__optionLineOne">
               Hallo{" "}
-              {user ? (displayName ? displayName : user?.email) : "Guest"}
+              {user ?  user?.email : "Guest"}
             </span>
             <span className="header__optionLineTwo">
               {user ? "Sign Out" : "Sign In"}
@@ -64,7 +62,6 @@ function Header() {
             <span className="header__optionLineTwo header__basketCount">
               {basket?.length}
             </span>
-            {/* the reason of ? if any reason dont have the correct value or basket becomes undefined due to an error , it gracefully handle the error  */}
           </div>
         </Link>
       </div>

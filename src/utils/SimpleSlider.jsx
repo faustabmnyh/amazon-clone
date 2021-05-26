@@ -23,7 +23,6 @@ class SimpleSlider extends React.Component {
       <div className="container">
         <Slider {...settings} >
             <div>
-              {/* kenapa masih menggunakan class home image karena masih kehung ke image */}
             <img 
                 className="container__image"
                 src="https://m.media-amazon.com/images/G/01/digital/video/sonata/US_SVOD_TheBoys_S2_NowStreaming_CONTROL/fc19a988-4a45-4b5f-8e59-929039ccab1d._UR3000,600_SX1500_FMwebp_.jpg" alt=""/>

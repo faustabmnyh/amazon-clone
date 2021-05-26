@@ -14,25 +14,20 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 
-const promise = loadStripe(
-  "pk_test_51HQog0E0XWms1zj7wB84LUGtu3SgDcN24mcCVEYNDnYrI0cgk6UEhzhAllq9FzQp8vyhafXIHjzYqVE17KcKUtBD00TvnOJfxm"
-);
+// stripe PUBLIC KEY
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
 
   useEffect(() => {
-    // will only run once when the app component load
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // the user just logged in / the use was logged in
-
         dispatch({
           type: "SET_USER",
           user: authUser,
         });
       } else {
-        // the user is logged out
         dispatch({
           type: "SET_USER",
           user: null,
@@ -42,11 +37,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    // BEM convention
     <Router>
       <div className="App">
         <Switch>
-          {/* untuk router */}
           <Route path="/orders">
             <Header />
             <Orders />

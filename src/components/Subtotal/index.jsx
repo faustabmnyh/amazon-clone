@@ -29,8 +29,7 @@ function Subtotal() {
         thousandSeparator={true}
         prefix={"IDR"}
       />
-      <button onClick={e => history.push("/payment")}>Proceed to Checkout</button>
-      {/* history ngepush link aslinya keknya si gitu */}
+      <button onClick={() => history.push("/payment")}>Proceed to Checkout</button>
     </div>
   );
 }
