@@ -1,0 +1,20 @@
+.container {
+    margin-bottom: -280px;
+}
+
+.container__image {
+    width: 100%;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom,rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+@media screen and (max-width: 996px) {
+    .container {
+        margin-bottom: -130px;
+    }
+
+    .container__image {
+        width: 100%;
+        z-index: -1;
+    }
+}
