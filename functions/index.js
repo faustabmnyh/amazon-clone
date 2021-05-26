@@ -15,6 +15,10 @@ app.use(
 );
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("man");
+});
+
 // -API routes
 app.post("/payments/create", async (request, response) => {
   const total = request.query.total;
