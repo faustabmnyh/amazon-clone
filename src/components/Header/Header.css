@@ -70,10 +70,10 @@
 
 @media screen and (max-width: 768px) {
   .header {
-    height: 178px;
-    position: relative;
     display: block;
-    overflow: hidden;
+    height: fit-content;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
 
   .header__search {
@@ -125,10 +125,8 @@
   .header__optionLineOne {
     font-size: 13px;
   }
-  
+
   .header__optionLineTwo {
     font-size: 16px;
   }
-
-
 }

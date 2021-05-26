@@ -12,7 +12,7 @@ const reducer = (state, action) => {
     case "ADD_TO_BASKET":
       return {
         ...state, 
-        basket: [...state.basket, action.item],
+        basket: [action.item, ...state.basket],
       };
 
     case "REMOVE_FROM_BASKET":

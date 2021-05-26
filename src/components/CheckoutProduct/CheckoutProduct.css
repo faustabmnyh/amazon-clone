@@ -50,6 +50,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .checkoutProduct {
+    flex-direction: column;
+  }
+
   .checkoutProduct__title {
     font-size: 14px;
     font-weight: 800;
@@ -65,5 +69,9 @@
     height: 120px;
     padding-top: 5px !important;
     margin-right: 10px;
+  }
+
+  .checkoutProduct__info button {
+    width: 100%;
   }
 }
